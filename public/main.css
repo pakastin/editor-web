@@ -1,0 +1,151 @@
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 1.87vw;
+  background-color: #161616;
+  color: hsl(220, 15%, 70%);
+  box-sizing: border-box;
+}
+.editor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100%;
+}
+.editor > textarea {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100%;
+  font: inherit;
+  color: inherit;
+  margin: 0;
+  padding: 5vw;
+  border: 0;
+  outline: 0;
+  background: none;
+  tab-size: 2;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow: hidden;
+  color: #ccc;
+  -webkit-text-fill-color: transparent;
+}
+.editor > textarea::-webkit-input-placeholder {
+  color: none;
+  -webkit-text-fill-color: initial;
+}
+::selection {
+  background-color: hsl(220, 10%, 60%);
+  color: rgba(0, 0, 0, 0);
+}
+.output {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100%;
+  padding: 5vw;
+  tab-size: 2;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  pointer-events: none;
+}
+
+.preview {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.token.comment {
+  color: #666;
+}
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #aaa;
+}
+
+
+.token.punctuation {
+  color: #888;
+}
+
+.namespace {
+  color: #aaa;
+}
+
+.token.property {
+  color: #888;
+}
+.token.tag,
+.token.constant,
+.token.symbol {
+  color: #E57373; // red
+}
+
+.token.function {
+  color: hsl(210, 80%, 70%); // blue
+}
+
+.token.selector,
+.token.attr-name,
+.token.char,
+.token.builtin,
+.token.inserted,
+.token.class-name,
+.token.boolean,
+.token.number {
+	color: #FFB74D; // orange
+}
+
+.token.operator {
+  color: #4DD0E1; // cyan
+}
+.token.entity,
+.token.url,
+.token.variable {
+	color: #fff;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.string {
+  color: #AED581; // green
+}
+
+.token.keyword {
+  color: #BA68C8; // purple
+}
+
+.token.regex,
+.token.important {
+	color: #fff;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+
+.token.deleted {
+	color: red;
+}

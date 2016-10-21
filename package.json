@@ -1,0 +1,29 @@
+{
+  "name": "editor-web",
+  "version": "0.0.1",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node watch",
+    "build-css": "stylus -u nib css/index.styl -o public/css/main-dev.css",
+    "uglify-css": "stylus -c -u nib css/index.styl -o public/css/main.css",
+    "build-js": "rollup -c -f iife js/index.js -o public/js/main-dev.js",
+    "build-worker-js": "rollup -c -f iife js/worker/index.js -o public/js/worker-dev.js",
+    "uglify-js": "uglifyjs public/js/main-dev.js -cmo public/js/main.js",
+    "uglify-worker-js": "uglifyjs public/js/worker-dev.js -cmo public/js/worker.js",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "~4.14.0"
+  },
+  "devDependencies": {
+    "chokidar": "~1.6.1",
+    "nib": "~1.1.2",
+    "rollup": "~0.36.3",
+    "rollup-plugin-buble": "~0.14.0",
+    "stylus": "~0.54.5",
+    "uglify-js": "~2.7.3"
+  }
+}

@@ -1,0 +1,170 @@
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  font-size: 1.87vw;
+}
+body {
+  font-family: 'Roboto Mono', monospace;
+  background-color: #161616;
+  color: #a7afbe;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.editor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100%;
+}
+.editor > textarea {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100%;
+  font: inherit;
+  color: inherit;
+  margin: 0;
+  padding: 5vw;
+  border: 0;
+  outline: 0;
+  background: none;
+  -moz-tab-size: 2;
+  -o-tab-size: 2;
+  tab-size: 2;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow: hidden;
+  color: #ccc;
+  -webkit-text-fill-color: transparent;
+  -moz--text-fill-color: transparent;
+  -ms-text-fill-color: transparent;
+  text-fill-color: transparent;
+}
+.editor > textarea::input-placeholder,
+.editor > textarea::-webkit-input-placeholder,
+.editor > textarea::-moz-input-placeholder,
+.editor > textarea::-ms-input-placeholder {
+  color: none;
+  -webkit-text-fill-color: initial;
+  -moz--text-fill-color: initial;
+  -ms-text-fill-color: initial;
+  text-fill-color: initial;
+}
+::selection {
+  background-color: #8f96a3;
+  color: rgba(0,0,0,0);
+}
+.output {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100%;
+  padding: 5vw;
+  -moz-tab-size: 2;
+  -o-tab-size: 2;
+  tab-size: 2;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  pointer-events: none;
+}
+.preview {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.preview-button {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #fff;
+  color: #333;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+.preview-button.black {
+  background-color: #111;
+  color: #eee;
+}
+.token.comment {
+  color: #666;
+}
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #aaa;
+}
+.token.punctuation {
+  color: #888;
+}
+.namespace {
+  color: #aaa;
+}
+.token.property {
+  color: #888;
+}
+.token.tag,
+.token.constant,
+.token.symbol {
+  color: #e57373;
+}
+.token.function {
+  color: #75b2f0;
+}
+.token.selector,
+.token.attr-name,
+.token.char,
+.token.builtin,
+.token.inserted,
+.token.class-name,
+.token.boolean,
+.token.number {
+  color: #ffb74d;
+}
+.token.operator {
+  color: #4dd0e1;
+}
+.token.entity,
+.token.url,
+.token.variable {
+  color: #fff;
+}
+.token.atrule,
+.token.attr-value,
+.token.string {
+  color: #aed581;
+}
+.token.keyword {
+  color: #ba68c8;
+}
+.token.regex,
+.token.important {
+  color: #fff;
+}
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+.token.italic {
+  font-style: italic;
+}
+.token.entity {
+  cursor: help;
+}
+.token.deleted {
+  color: #f00;
+}

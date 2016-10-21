@@ -1,0 +1,178 @@
+@import 'nib'
+
+text-fill-color(n) {
+  -webkit-text-fill-color: n;
+  -moz--text-fill-color: n;
+  -ms-text-fill-color: n;
+  text-fill-color: n;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+html {
+  text-size-adjust: 100%;
+  font-size: 1.87vw;
+}
+body {
+  font-family: 'Roboto Mono', monospace;
+  background-color: #161616;
+  color: hsl(220, 15%, 70%);
+  box-sizing: border-box;
+}
+.editor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100%;
+}
+.editor > textarea {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100%;
+  font: inherit;
+  color: inherit;
+  margin: 0;
+  padding: 5vw;
+  border: 0;
+  outline: 0;
+  background: none;
+  tab-size: 2;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow: hidden;
+  color: #ccc;
+  text-fill-color: transparent;
+}
+.editor {
+  > textarea {
+    &::input-placeholder, &::-webkit-input-placeholder, &::-moz-input-placeholder, &::-ms-input-placeholder {
+      color: none;
+      text-fill-color: initial;
+    }
+  }
+}
+::selection {
+  background-color: hsl(220, 10%, 60%);
+  color: rgba(0, 0, 0, 0);
+}
+.output {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100%;
+  padding: 5vw;
+  tab-size: 2;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  pointer-events: none;
+}
+
+.preview {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.preview-button {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  padding: .5rem 1rem;
+  background-color: #fff;
+  color: #333;
+  border-radius: .25rem;
+  cursor: pointer;
+
+  &.black {
+    background-color: #111;
+    color: #eee;
+  }
+}
+
+.token.comment {
+  color: #666;
+}
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #aaa;
+}
+
+
+.token.punctuation {
+  color: #888;
+}
+
+.namespace {
+  color: #aaa;
+}
+
+.token.property {
+  color: #888;
+}
+.token.tag,
+.token.constant,
+.token.symbol {
+  color: #E57373; // red
+}
+
+.token.function {
+  color: hsl(210, 80%, 70%); // blue
+}
+
+.token.selector,
+.token.attr-name,
+.token.char,
+.token.builtin,
+.token.inserted,
+.token.class-name,
+.token.boolean,
+.token.number {
+	color: #FFB74D; // orange
+}
+
+.token.operator {
+  color: #4DD0E1; // cyan
+}
+.token.entity,
+.token.url,
+.token.variable {
+	color: #fff;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.string {
+  color: #AED581; // green
+}
+
+.token.keyword {
+  color: #BA68C8; // purple
+}
+
+.token.regex,
+.token.important {
+	color: #fff;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+
+.token.deleted {
+	color: red;
+}

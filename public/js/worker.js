@@ -1,0 +1,1 @@
+!function(){"use strict";importScripts("prism.js"),self.addEventListener("message",function(t){var s=t.data,i=s.type,a=s.data;"highlight"===i&&self.postMessage({type:"highlight",data:Prism.highlight(a,Prism.languages.markup)})})}();
