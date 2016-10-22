@@ -41,16 +41,11 @@ var Editor = function Editor (parent) {
       ].join('\n')
     }),
     this.output = el('.output'),
-    this.preview = el('iframe.preview', { style: { background: '#fff', border: 0, display: 'none' } }),
-    this.previewButton = el('.preview-button',
-      this.previewButtonIcon = el('i.fi-eye')
-    )
+    this.preview = el('iframe.preview', { style: { background: '#fff', border: 0, display: 'none' } })
   );
   this.input.selectionStart = this.input.selectionEnd = 118;
   this.render();
   history.push(this.input.value);
-
-  this.previewButton.onclick = function (e) { return this$1.togglePreview(); };
 
   this.input.oncopy = function (e) {
     var text = '';
@@ -90,12 +85,18 @@ var Editor = function Editor (parent) {
     this$1._validatedInput = false;
   });
 
+  this.input.onmousemove = function (e) {
+    this$1.input.style.cursor = '';
+  };
+
   this.input.onmouseup = function (e) {
     this$1.render();
   };
 
   this.input.onkeydown = function (e) {
     var which = e.which;
+
+    this$1.input.style.cursor = 'none';
 
     this$1._validatedInput = true;
 
@@ -141,11 +142,39 @@ var Editor = function Editor (parent) {
 
   window.addEventListener('keydown', function (e) {
     switch (e.which) {
+      case 51:
+        if (e.ctrlKey || e.metaKey) {
+          e.preventDefault();
+
+          this$1.fullPreview();
+        }
+        break
+      case 50:
+        if (e.ctrlKey || e.metaKey) {
+          e.preventDefault();
+
+          this$1.showPreview();
+        }
+        break
+      case 49:
+        if (e.ctrlKey || e.metaKey) {
+          e.preventDefault();
+
+          this$1.hidePreview();
+        }
+        break
+      case 82:
+        if (e.ctrlKey || e.metaKey) {
+          e.preventDefault();
+
+          this$1.refreshPreview();
+        }
+        break
       case 83:
         if (e.ctrlKey || e.metaKey) {
           e.preventDefault();
 
-          this$1.togglePreview();
+          this$1.showPreview();
         }
         break
       case 90:
@@ -226,24 +255,36 @@ Editor.prototype.render = function render () {
     data: html
   });
 };
-Editor.prototype.togglePreview = function togglePreview () {
-  if (this.preview.style.display === '') {
-    this.preview.style.display = 'none';
-    this.previewButton.classList.remove('black');
-    this.previewButtonIcon.classList.add('fi-eye');
-    this.previewButtonIcon.classList.remove('fi-page-edit');
-    this.input.focus();
-  } else {
-    var html = editor.input.value;
+Editor.prototype.refreshPreview = function refreshPreview () {
+  var html = editor.input.value;
+  this.preview.src = 'data:text/html;charset=utf-8,' + encodeURIComponent(html);
+};
+Editor.prototype.hidePreview = function hidePreview () {
+  this.preview.style.display = 'none';
+  this.preview.style.width = '';
+  this.input.style.width = '';
+  this.output.style.width = '';
+  this.input.focus();
+};
+Editor.prototype.showPreview = function showPreview () {
+  var html = editor.input.value;
 
-    this.preview.src = '';
-    this.preview.src = 'data:text/html;charset=utf-8,' + encodeURIComponent(html);
+  this.preview.src = 'data:text/html;charset=utf-8,' + encodeURIComponent(html);
 
-    this.preview.style.display = '';
-    this.previewButtonIcon.classList.remove('fi-eye');
-    this.previewButtonIcon.classList.add('fi-page-edit');
-    this.previewButton.classList.add('black');
-  }
+  this.preview.style.display = '';
+  this.preview.style.width = '';
+  this.input.style.width = '50%';
+  this.output.style.width = '50%';
+};
+Editor.prototype.fullPreview = function fullPreview () {
+  var html = editor.input.value;
+
+  this.preview.src = 'data:text/html;charset=utf-8,' + encodeURIComponent(html);
+
+  this.preview.style.display = '';
+  this.preview.style.width = '100%';
+  this.input.style.width = '100%';
+  this.output.style.width = '100%';
 };
 
 var editor = new Editor();
@@ -263,8 +304,5 @@ worker.addEventListener('message', function (e) {
 });
 
 mount(document.body, editor);
-document.addEventListener('DOMContentLoaded', function () {
-  FastClick.attach(document.body);
-}, false);
 
 }());

@@ -40,16 +40,11 @@ class Editor {
         ].join('\n')
       }),
       this.output = el('.output'),
-      this.preview = el('iframe.preview', { style: { background: '#fff', border: 0, display: 'none' } }),
-      this.previewButton = el('.preview-button',
-        this.previewButtonIcon = el('i.fi-eye')
-      )
+      this.preview = el('iframe.preview', { style: { background: '#fff', border: 0, display: 'none' } })
     )
     this.input.selectionStart = this.input.selectionEnd = 118
     this.render()
     history.push(this.input.value)
-
-    this.previewButton.onclick = e => this.togglePreview()
 
     this.input.oncopy = (e) => {
       let text = ''
@@ -89,12 +84,18 @@ class Editor {
       this._validatedInput = false
     })
 
+    this.input.onmousemove = e => {
+      this.input.style.cursor = ''
+    }
+
     this.input.onmouseup = e => {
       this.render()
     }
 
     this.input.onkeydown = (e) => {
       const which = e.which
+
+      this.input.style.cursor = 'none'
 
       this._validatedInput = true
 
@@ -140,11 +141,39 @@ class Editor {
 
     window.addEventListener('keydown', e => {
       switch (e.which) {
+        case 51:
+          if (e.ctrlKey || e.metaKey) {
+            e.preventDefault()
+
+            this.fullPreview()
+          }
+          break
+        case 50:
+          if (e.ctrlKey || e.metaKey) {
+            e.preventDefault()
+
+            this.showPreview()
+          }
+          break
+        case 49:
+          if (e.ctrlKey || e.metaKey) {
+            e.preventDefault()
+
+            this.hidePreview()
+          }
+          break
+        case 82:
+          if (e.ctrlKey || e.metaKey) {
+            e.preventDefault()
+
+            this.refreshPreview()
+          }
+          break
         case 83:
           if (e.ctrlKey || e.metaKey) {
             e.preventDefault()
 
-            this.togglePreview()
+            this.showPreview()
           }
           break
         case 90:
@@ -222,24 +251,36 @@ class Editor {
       data: html
     })
   }
-  togglePreview () {
-    if (this.preview.style.display === '') {
-      this.preview.style.display = 'none'
-      this.previewButton.classList.remove('black')
-      this.previewButtonIcon.classList.add('fi-eye')
-      this.previewButtonIcon.classList.remove('fi-page-edit')
-      this.input.focus()
-    } else {
-      const html = editor.input.value
+  refreshPreview () {
+    const html = editor.input.value
+    this.preview.src = 'data:text/html;charset=utf-8,' + encodeURIComponent(html)
+  }
+  hidePreview () {
+    this.preview.style.display = 'none'
+    this.preview.style.width = ''
+    this.input.style.width = ''
+    this.output.style.width = ''
+    this.input.focus()
+  }
+  showPreview () {
+    const html = editor.input.value
 
-      this.preview.src = ''
-      this.preview.src = 'data:text/html;charset=utf-8,' + encodeURIComponent(html)
+    this.preview.src = 'data:text/html;charset=utf-8,' + encodeURIComponent(html)
 
-      this.preview.style.display = ''
-      this.previewButtonIcon.classList.remove('fi-eye')
-      this.previewButtonIcon.classList.add('fi-page-edit')
-      this.previewButton.classList.add('black')
-    }
+    this.preview.style.display = ''
+    this.preview.style.width = ''
+    this.input.style.width = '50%'
+    this.output.style.width = '50%'
+  }
+  fullPreview () {
+    const html = editor.input.value
+
+    this.preview.src = 'data:text/html;charset=utf-8,' + encodeURIComponent(html)
+
+    this.preview.style.display = ''
+    this.preview.style.width = '100%'
+    this.input.style.width = '100%'
+    this.output.style.width = '100%'
   }
 }
 
@@ -258,6 +299,3 @@ worker.addEventListener('message', function (e) {
 })
 
 mount(document.body, editor)
-document.addEventListener('DOMContentLoaded', function () {
-  FastClick.attach(document.body)
-}, false)

@@ -1,3 +1,5 @@
+'use strict'
+
 require('./server')
 
 const cp = require('child_process')
